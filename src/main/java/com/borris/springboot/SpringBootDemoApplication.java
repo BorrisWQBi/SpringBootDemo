@@ -1,12 +1,12 @@
-package com.borris.springboot.demo.SpringBootDemo;
+package com.borris.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication
+@ComponentScan(basePackages = {"com.borris"})
 public class SpringBootDemoApplication {
 
 	public static void main(String[] args) {

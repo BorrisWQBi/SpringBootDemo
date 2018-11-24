@@ -1,4 +1,4 @@
-package com.borris.springboot.demo.SpringBootDemo.controller;
+package com.borris.controller;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;

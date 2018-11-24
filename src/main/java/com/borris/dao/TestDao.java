@@ -1,4 +1,4 @@
-package com.borris.springboot.demo.SpringBootDemo.dao;
+package com.borris.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
