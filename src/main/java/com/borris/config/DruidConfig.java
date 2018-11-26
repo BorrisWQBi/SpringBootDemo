@@ -2,9 +2,11 @@ package com.borris.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -49,9 +51,24 @@ public class DruidConfig {
         return frb;
     }
 
-    @Bean("druidStatInterceptor")
+    @Bean("druid-stat-interceptor")
     public DruidStatInterceptor druidStatInterceptor(){
         return new DruidStatInterceptor();
+    }
+
+    @Bean("druid-type-proxyCreator")
+    public BeanTypeAutoProxyCreator beanTypeAutoProxyCreator(){
+        BeanTypeAutoProxyCreator btapc = new BeanTypeAutoProxyCreator();
+//        beanTypeAutoProxyCreator.setTargetBeanType();
+        btapc.setInterceptorNames(new String[]{"druid-stat-interceptor"});
+        return btapc;
+    }
+
+    @Bean("druid-stat-pointcut")
+    public JdkRegexpMethodPointcut jdkRegexpMethodPointcut(){
+        JdkRegexpMethodPointcut jrmp = new JdkRegexpMethodPointcut();
+        jrmp.setPatterns(new String[]{"com.borris.dao.*"});
+        return jrmp;
     }
 
 }
