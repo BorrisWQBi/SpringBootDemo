@@ -1,17 +1,21 @@
 package com.borris.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import com.alibaba.druid.support.spring.stat.BeanTypeAutoProxyCreator;
 import com.alibaba.druid.support.spring.stat.DruidStatInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.JdkRegexpMethodPointcut;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,19 +60,25 @@ public class DruidConfig {
         return new DruidStatInterceptor();
     }
 
-    @Bean("druid-type-proxyCreator")
-    public BeanTypeAutoProxyCreator beanTypeAutoProxyCreator(){
-        BeanTypeAutoProxyCreator btapc = new BeanTypeAutoProxyCreator();
-//        beanTypeAutoProxyCreator.setTargetBeanType();
-        btapc.setInterceptorNames(new String[]{"druid-stat-interceptor"});
-        return btapc;
-    }
+//    @Bean("druid-type-proxyCreator")
+//    public BeanTypeAutoProxyCreator beanTypeAutoProxyCreator(){
+//        BeanTypeAutoProxyCreator btapc = new BeanTypeAutoProxyCreator();
+////        beanTypeAutoProxyCreator.setTargetBeanType();
+//        btapc.setInterceptorNames(new String[]{"druid-stat-interceptor"});
+//        return btapc;
+//    }
 
     @Bean("druid-stat-pointcut")
     public JdkRegexpMethodPointcut jdkRegexpMethodPointcut(){
         JdkRegexpMethodPointcut jrmp = new JdkRegexpMethodPointcut();
         jrmp.setPatterns(new String[]{"com.borris.dao.*"});
         return jrmp;
+    }
+
+    @Bean("druidAdvisor")
+    public Advisor druidAdvisor(JdkRegexpMethodPointcut jrmp,DruidStatInterceptor dsi) {
+        Advisor adv = new DefaultPointcutAdvisor(jrmp, dsi);
+        return adv;
     }
 
 }
