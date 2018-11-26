@@ -11,7 +11,6 @@ import java.util.Map;
 
 
 @Repository
-@Transactional(propagation = Propagation.MANDATORY)
 public class TestDao {
 
     @Autowired

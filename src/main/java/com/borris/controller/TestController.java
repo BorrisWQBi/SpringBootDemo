@@ -14,14 +14,12 @@ import java.util.Map;
 
 
 @RestController
-@Component("TestController")
 @RequestMapping(value="/test")
 public class TestController {
 
     @Autowired
     TestDao testDao;
 
-    @Transactional
     @RequestMapping(value="/test2/helloWorld2")
     public List<Map<String,String>> helloWorld(HttpServletRequest req, HttpServletResponse res){
         List<Map<String,String>> result = testDao.getAll();

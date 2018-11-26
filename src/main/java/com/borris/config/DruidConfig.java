@@ -31,7 +31,7 @@ public class DruidConfig {
         srb.setServlet(new StatViewServlet());
         srb.setName("DruidStatView");
         srb.addInitParameter("resetEnable","true");
-        srb.addInitParameter("loginUsername","druidAdmin");
+        srb.addInitParameter("loginUsername","root");
         srb.addInitParameter("loginPassword","1234");
         List<String> urls = new ArrayList<String>();
         urls.add("/druid/*");
