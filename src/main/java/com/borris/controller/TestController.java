@@ -4,6 +4,7 @@ import com.borris.dao.TestDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +21,9 @@ public class TestController {
     @Autowired
     TestDao testDao;
 
-    @RequestMapping(value="/test2/helloWorld2")
-    public List<Map<String,String>> helloWorld(HttpServletRequest req, HttpServletResponse res){
-        List<Map<String,String>> result = testDao.getAll();
+    @RequestMapping(value="/test2/helloWorld2",method=RequestMethod.GET)
+    public List<Map<String,Object>> helloWorld(HttpServletRequest req, HttpServletResponse res){
+        List<Map<String,Object>> result = testDao.getAll();
         return result;
     }
 }

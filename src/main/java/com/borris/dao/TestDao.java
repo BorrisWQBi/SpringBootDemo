@@ -16,7 +16,7 @@ public class TestDao {
     @Autowired
     private UserMapper userMapper;
 
-    public List<Map<String,String>> getAll(){
+    public List<Map<String,Object>> getAll(){
         return userMapper.getUserList();
     }
 
