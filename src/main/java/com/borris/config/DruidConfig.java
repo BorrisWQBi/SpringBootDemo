@@ -14,6 +14,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class DruidConfig {
     }
 
     @Bean("druidAdvisor")
+    @Order(3)
     public Advisor druidAdvisor(JdkRegexpMethodPointcut jrmp,DruidStatInterceptor dsi) {
         Advisor adv = new DefaultPointcutAdvisor(jrmp, dsi);
         return adv;
