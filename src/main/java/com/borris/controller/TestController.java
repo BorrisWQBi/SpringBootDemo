@@ -24,6 +24,7 @@ public class TestController {
     @RequestMapping(value="/test2/helloWorld2",method=RequestMethod.GET)
     public List<Map<String,Object>> helloWorld(HttpServletRequest req, HttpServletResponse res){
         List<Map<String,Object>> result = testDao.getAll();
+
         return result;
     }
 }

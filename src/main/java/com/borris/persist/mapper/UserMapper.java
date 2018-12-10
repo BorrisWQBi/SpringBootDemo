@@ -11,6 +11,5 @@ import java.util.Map;
 @Component
 public interface UserMapper {
 
-    @Select("select * from tbl_user")
     List<Map<String,Object>> getUserList();
 }
