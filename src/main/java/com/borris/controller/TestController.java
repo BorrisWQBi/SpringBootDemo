@@ -1,6 +1,7 @@
 package com.borris.controller;
 
 import com.borris.dao.TestDao;
+import com.borris.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +23,7 @@ public class TestController {
     TestDao testDao;
 
     @RequestMapping(value="/test2/helloWorld2",method=RequestMethod.GET)
-    public List<Map<String,Object>> helloWorld(HttpServletRequest req, HttpServletResponse res){
-        List<Map<String,Object>> result = testDao.getAll();
-
-        return result;
+    public List<User> helloWorld(HttpServletRequest req, HttpServletResponse res){
+        return testDao.getAllUser();
     }
 }
