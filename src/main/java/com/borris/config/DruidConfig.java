@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.JdkRegexpMethodPointcut;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,6 +83,19 @@ public class DruidConfig {
     public Advisor druidAdvisor(JdkRegexpMethodPointcut jrmp,DruidStatInterceptor dsi) {
         Advisor adv = new DefaultPointcutAdvisor(jrmp, dsi);
         return adv;
+    }
+
+    @Bean(name="dataSource",initMethod = "init",destroyMethod = "close")
+    public DataSource druidDataSource(@Value( "${spring.datasource.driver-class-name}" ) String driver,
+                                      @Value( "${spring.datasource.url}" )String url,
+                                      @Value( "${spring.datasource.username}" )String username,
+                                      @Value( "${spring.datasource.password}" )String password) throws SQLException {
+        DruidDataSource dds = new DruidDataSource();
+        dds.setDriverClassName(driver);
+        dds.setUrl(url);
+        dds.setUsername(username);
+        dds.setPassword(password);
+        return dds;
     }
 
 }
