@@ -7,7 +7,6 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
-@Component
 @Order(2)
 public class TestAspect2 {
     @Before("PointcutConfig.allControllerMethod()")

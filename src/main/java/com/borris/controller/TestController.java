@@ -3,6 +3,7 @@ package com.borris.controller;
 import com.borris.dao.TestDao;
 import com.borris.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-
+@Component
 @RestController
 @RequestMapping(value = "/test")
 public class TestController {
