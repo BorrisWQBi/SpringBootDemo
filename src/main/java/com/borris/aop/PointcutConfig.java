@@ -101,4 +101,9 @@ public class PointcutConfig {
     public void allPublicControllerWithReq(HttpServletRequest req, HttpServletResponse res){
 
     }
+
+    @Pointcut("execution(* com.borris.service.*.* (..))")
+    public void allService(){
+
+    }
 }

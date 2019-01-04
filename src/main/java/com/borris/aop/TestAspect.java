@@ -14,17 +14,22 @@ import org.springframework.stereotype.Component;
 public class TestAspect {
 
 
-    @Before("PointcutConfig.allControllerMethod()")
+    @Before("PointcutConfig.allControllerMethod() && PointcutConfig.allService()")
     public void beforeAllPublicMethod(JoinPoint joinPoint) {
         System.out.println(" beforeAllPublicMethod 111");
     }
 
-    @Around("PointcutConfig.allControllerMethod()")
+    @Before("PointcutConfig.allService()")
+    public void beforeAllPublicMethodService(JoinPoint joinPoint) {
+        System.out.println(" beforeAllPublicMethod Service");
+    }
+
+    @Around("PointcutConfig.allControllerMethod() && PointcutConfig.allService()")
     public Object aroundAllPublicMethod(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println(" aroundAllPublicMethod 111");
         return pjp.proceed();
     }
-    @Around("PointcutConfig.allControllerMethod()")
+    @Around("PointcutConfig.allControllerMethod() && PointcutConfig.allService()")
     public Object aroundAllPublicMethod2(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println(" aroundAllPublicMethod 111");
         return pjp.proceed();

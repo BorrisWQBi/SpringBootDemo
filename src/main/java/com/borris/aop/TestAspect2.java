@@ -15,9 +15,9 @@ public class TestAspect2 {
         System.out.println(" beforeAllPublicMethod 222");
     }
     @Around("PointcutConfig.allControllerMethod()")
-    public void aroundAllPublicMethod(ProceedingJoinPoint pjp) throws Throwable {
+    public Object aroundAllPublicMethod(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println(" aroundAllPublicMethod 222");
-        pjp.proceed();
+        return pjp.proceed();
     }
 
     @After("PointcutConfig.allControllerMethod()")
